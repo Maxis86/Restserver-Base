@@ -52,21 +52,19 @@ const usuariosPut = async (req, res) => {
 
   res.json({
     msg: "put Api - Controlador",
-    usuario,
+    usuario
   });
 };
 
 const usuariosDelete = async (req, res) => {
   const { id } = req.params;
-
-  //Fisicamente lo borramos
-  //const usuario = await Usuario.findByIdAndDelete(id);
-
-  //Cambiar el estado del usuario
+  
   const usuario = await Usuario.findByIdAndUpdate(id, {estado:false})
+  const usuarioAutenticado = req.usuario;
 
-  res.json({ 
-    usuario 
+  res.json( {
+    usuario,
+    usuarioAutenticado
   });
 };
 
