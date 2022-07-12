@@ -10,7 +10,7 @@
 
 <body>
     <h1>Google Sign-in</h1>
-    <div id="g_id_onload" data-client_id="1067181286260-47hk7r7vp4m49kfuhcvv296q3cm5ldao.apps.googleusercontent.com"
+    <div id="g_id_onload" data-client_id="1067181286260-rkvcsuvn2ncnql9o1r2oenl8hc1eqhvh.apps.googleusercontent.com"
         data-auto_prompt="false" data-callback="handleCredentialResponse">
     </div>
     <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with"
@@ -23,6 +23,11 @@
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
+
+        let url = (window.location.hostname.includes('localhost')) ?
+            'http://localhost:8080/api/auth/google' :
+            '1067181286260-rkvcsuvn2ncnql9o1r2oenl8hc1eqhvh.apps.googleusercontent.com';
+
         function handleCredentialResponse(response) {
 
             // Google Token: ID_ token
@@ -30,7 +35,7 @@
 
             const body = { id_token: response.credential }
 
-            fetch('http://localhost:8080/api/auth/google', {
+            fetch(url, {
                 method: 'Post',
                 headers: {
                     'Content-type': 'application/json'
